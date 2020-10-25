@@ -1,0 +1,166 @@
+html,
+body {
+  font-family: "Raleway", sans-serif;
+  height: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none !important;
+}
+
+/* CUSTOM */
+.credits {
+  font-size: small;
+  opacity: 0.2;
+}
+
+.accent_color {
+  color: #0fa4df !important;
+}
+
+.contact {
+  width: 100%;
+  bottom: 25px;
+  text-align: center;
+}
+
+.mainDiv {
+  width: 100%;
+}
+
+/* END OF CUSTOM */
+
+.dark-gray-background {
+  background-image: url("../assets/bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.light-white-font {
+  color: #fdfdff;
+}
+
+.image-cover {
+  width: 200px;
+  height: 200px;
+  border: 1px solid white;
+  border-radius: 50%;
+  object-fit: cover;
+  transform: translate(-50%, -70%);
+  top: 22%;
+}
+
+.typed-cursor {
+  -webkit-animation: blink 0.7s infinite;
+  -moz-animation: blink 0.7s infinite;
+  animation: blink 0.7s infinite;
+  opacity: 1;
+}
+
+@media (min-width: 1081px) {
+  .image-cover {
+    width: 25vh;
+    height: 25vh;
+  }
+
+  .mainText p {
+    font-size: 5vh;
+    font-weight: 400;
+  }
+  .mainText strong {
+    font-size: 5vh;
+  }
+
+  .contact p {
+    font-size: 50px;
+  }
+}
+/* A8 */
+@media (min-width: 768px) and (max-width: 1080px) {
+  .image-cover {
+    width: 25vh;
+    height: 25vh;
+  }
+
+  .mainText {
+    height: 150px;
+  }
+
+  .mainText p {
+    font-size: 4vh;
+    font-weight: 400;
+  }
+  .mainText strong {
+    font-size: 4vh;
+  }
+
+  .contact button {
+    font-size: 2vw;
+  }
+  .contact p {
+    font-size: 4vh;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+  .image-cover {
+    width: 25vh;
+    height: 25vh;
+  }
+
+  .mainText {
+    height: 150px;
+  }
+
+  .mainText p {
+    font-size: 28px;
+    font-weight: 400;
+  }
+  .mainText strong {
+    font-size: 30px;
+  }
+
+  .contact button {
+    font-size: 2vw;
+  }
+  .contact p {
+    font-size: 6vw;
+  }
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-moz-keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/*# sourceMappingURL=main.css.map */
