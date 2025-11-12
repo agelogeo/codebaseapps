@@ -2,13 +2,13 @@ import { Mail, Twitter, Instagram } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-card/50 backdrop-blur border-t border-border/50 py-8">
-      <div className="container mx-auto px-6">
+    <footer className="bg-card/50 backdrop-blur border-t border-border/50 py-6 sm:py-8">
+      <div className="container mx-auto px-4 sm:px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           {/* Email */}
-          <div className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
-            <Mail className="h-4 w-4" />
-            <a href="mailto:codebaseapps@gmail.com">codebaseapps@gmail.com</a>
+          <div className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-sm sm:text-base">
+            <Mail className="h-4 w-4 flex-shrink-0" />
+            <a href="mailto:codebaseapps@gmail.com" className="break-all">codebaseapps@gmail.com</a>
           </div>
 
           {/* Social Media Links */}
@@ -34,7 +34,7 @@ const Footer = () => {
           </div>
 
           {/* Copyright */}
-          <div className="text-sm text-muted-foreground">
+          <div className="text-xs sm:text-sm text-muted-foreground text-center">
             Copyright 2025 © Codebase Apps
           </div>
         </div>

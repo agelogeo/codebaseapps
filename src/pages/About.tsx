@@ -6,10 +6,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 // Annual statements - Replace these paths with your actual PDF files
 // Place your PDF files in the public/statements/ folder
 const annualStatements = [
-  { year: 2025, title: "Annual Financial Statement 2025", size: "532 KB", date: "March 2025", path: "/statements/annual_25.pdf" },
-  // { year: 2023, title: "Annual Financial Statement 2023", size: "2.1 MB", date: "March 2023", path: "/statements/annual-2023.pdf" },
-  // { year: 2022, title: "Annual Financial Statement 2022", size: "1.9 MB", date: "March 2022", path: "/statements/annual-2022.pdf" },
-  { year: 2022, title: "Annual Financial Statement 2022", size: "237 KB", date: "March 2022", path: "/statements/annual_22.pdf" },
+  { year: 2024, title: "Annual Financial Statement 2024", size: "2.4 MB", date: "March 2024", path: "/statements/annual-2024.pdf" },
+  { year: 2023, title: "Annual Financial Statement 2023", size: "2.1 MB", date: "March 2023", path: "/statements/annual-2023.pdf" },
+  { year: 2022, title: "Annual Financial Statement 2022", size: "1.9 MB", date: "March 2022", path: "/statements/annual-2022.pdf" },
+  { year: 2021, title: "Annual Financial Statement 2021", size: "1.8 MB", date: "March 2021", path: "/statements/annual-2021.pdf" },
 ];
 
 const About = () => {
