@@ -4,16 +4,23 @@ This folder contains HTML versions of the Privacy Policy and Terms of Service pa
 
 ## Files
 
-- `privacy-policy.html` - Complete Privacy Policy page
-- `terms-of-service.html` - Complete Terms of Service page  
-- `legal-styles.css` - Shared CSS styling for both pages
+### Combined Version (Recommended)
+- `legal-combined.html` - Single page with both Privacy Policy and Terms of Service in tabs
+- `legal-styles-combined.css` - CSS styling for the combined page
+
+### Individual Pages  
+- `privacy-policy.html` - Standalone Privacy Policy page
+- `terms-of-service.html` - Standalone Terms of Service page
+- `legal-styles.css` - Shared CSS styling for individual pages
 
 ## Features
 
+✅ **Tab Navigation** - Easy switching between Privacy Policy and Terms of Service
 ✅ **Responsive Design** - Works on desktop, tablet, and mobile
 ✅ **Dark Mode Support** - Automatically adapts to user's system preference
-✅ **Print Friendly** - Optimized for printing with clean layouts
-✅ **Accessibility** - Proper heading structure and focus indicators
+✅ **Print Friendly** - Prints both documents when using combined version
+✅ **Accessibility** - Keyboard navigation, proper ARIA labels, focus management
+✅ **Browser History** - URLs update with tab selection (legal-page.html#privacy)
 ✅ **Professional Styling** - Clean, modern design matching OCC app branding
 
 ## Usage
