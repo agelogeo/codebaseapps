@@ -6,21 +6,29 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 
 // Annual statements - Replace these paths with your actual PDF files
 // Place your PDF files in the public/statements/ folder
+const getAssetPath = (path: string) => {
+  const base = import.meta.env.BASE_URL || '/';
+  return base + path.replace(/^\//, '');
+};
+
 const annualStatements = [
-  { year: 2024, title: "Annual Financial Statement 2025", size: "532 KB", date: "March 2025", path: "/statements/annual-2025.pdf" },
-  // { year: 2023, title: "Annual Financial Statement 2023", size: "2.1 MB", date: "March 2023", path: "/statements/annual-2023.pdf" },
-  { year: 2022, title: "Annual Financial Statement 2022", size: "237 KB", date: "March 2022", path: "/statements/annual-2022.pdf" },
-  // { year: 2021, title: "Annual Financial Statement 2021", size: "1.8 MB", date: "March 2021", path: "/statements/annual-2021.pdf" },
+  { year: 2024, title: "Annual Financial Statement 2025", size: "532 KB", date: "March 2025", path: "statements/annual-2025.pdf" },
+  // { year: 2023, title: "Annual Financial Statement 2023", size: "2.1 MB", date: "March 2023", path: "statements/annual-2023.pdf" },
+  { year: 2022, title: "Annual Financial Statement 2022", size: "237 KB", date: "March 2022", path: "statements/annual-2022.pdf" },
+  // { year: 2021, title: "Annual Financial Statement 2021", size: "1.8 MB", date: "March 2021", path: "statements/annual-2021.pdf" },
 ];
 
 const Index = () => {
   const handleDownload = async (path: string, title: string) => {
     try {
+      // Get the full path using the base URL
+      const fullPath = getAssetPath(path);
+      
       // Extract the actual filename from the path
       const fileName = path.split('/').pop() || 'document.pdf';
       
       // Fetch the file and create a blob for download
-      const response = await fetch(path);
+      const response = await fetch(fullPath);
       if (!response.ok) throw new Error('File not found');
       
       const blob = await response.blob();
@@ -39,7 +47,7 @@ const Index = () => {
     } catch (error) {
       // Fallback: open in new tab if download fails
       console.warn('Download failed, opening in new tab:', error);
-      window.open(path, '_blank');
+      window.open(getAssetPath(path), '_blank');
     }
   };
 
