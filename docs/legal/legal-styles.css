@@ -1,0 +1,228 @@
+/* Legal Pages Styles */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #fafafa;
+}
+
+.legal-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.legal-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #e1e5e9;
+}
+
+.legal-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+}
+
+.last-updated {
+    font-style: italic;
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.legal-content {
+    max-width: none;
+}
+
+.legal-section {
+    margin-bottom: 32px;
+}
+
+.legal-section h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #e1e5e9;
+    padding-bottom: 8px;
+}
+
+.legal-section p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #4a4a4a;
+    margin-bottom: 12px;
+}
+
+.legal-footer {
+    background-color: rgba(47, 102, 246, 0.05);
+    border: 1px solid rgba(47, 102, 246, 0.1);
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 40px;
+}
+
+.legal-footer h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 12px;
+}
+
+.legal-footer p {
+    color: #4a4a4a;
+    margin-bottom: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .legal-container {
+        margin: 20px;
+        padding: 16px;
+    }
+    
+    .legal-header h1 {
+        font-size: 2rem;
+    }
+    
+    .legal-section h2 {
+        font-size: 1.25rem;
+    }
+    
+    .legal-section p {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .legal-container {
+        margin: 10px;
+        padding: 12px;
+    }
+    
+    .legal-header h1 {
+        font-size: 1.75rem;
+    }
+    
+    .legal-footer {
+        padding: 16px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background-color: #fff;
+    }
+    
+    .legal-container {
+        box-shadow: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .legal-header h1 {
+        color: #000;
+    }
+    
+    .legal-section h2 {
+        color: #000;
+        page-break-after: avoid;
+    }
+    
+    .legal-section {
+        page-break-inside: avoid;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #121212;
+        color: #e0e0e0;
+    }
+    
+    .legal-container {
+        background-color: #1e1e1e;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    
+    .legal-header {
+        border-bottom-color: #333;
+    }
+    
+    .legal-header h1 {
+        color: #fff;
+    }
+    
+    .last-updated {
+        color: #aaa;
+    }
+    
+    .legal-section h2 {
+        color: #fff;
+        border-bottom-color: #333;
+    }
+    
+    .legal-section p {
+        color: #ccc;
+    }
+    
+    .legal-footer {
+        background-color: rgba(47, 102, 246, 0.1);
+        border-color: rgba(47, 102, 246, 0.2);
+    }
+    
+    .legal-footer h3 {
+        color: #fff;
+    }
+    
+    .legal-footer p {
+        color: #ccc;
+    }
+}
+
+/* Accessibility improvements */
+.legal-section h2:focus,
+.legal-header h1:focus {
+    outline: 2px solid #2f66f6;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Link styling for email addresses */
+a[href^="mailto:"] {
+    color: #2f66f6;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-bottom-color 0.2s ease;
+}
+
+a[href^="mailto:"]:hover {
+    border-bottom-color: #2f66f6;
+}
+
+/* Selection styling */
+::selection {
+    background-color: rgba(47, 102, 246, 0.2);
+    color: inherit;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
