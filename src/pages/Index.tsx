@@ -14,20 +14,33 @@ const annualStatements = [
 ];
 
 const Index = () => {
-  const handleDownload = (path: string, title: string) => {
-    // Create a temporary link element for direct download
-    const link = document.createElement('a');
-    link.href = path;
-    link.target = '_blank'; // Open in new tab as fallback
-    link.rel = 'noopener noreferrer';
-    
-    // Try to force download, but browser will handle PDF viewing/downloading based on user preferences
-    link.download = title.replace(/\s+/g, '_') + '.pdf';
-    
-    // Trigger the download
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  const handleDownload = async (path: string, title: string) => {
+    try {
+      // Extract the actual filename from the path
+      const fileName = path.split('/').pop() || 'document.pdf';
+      
+      // Fetch the file and create a blob for download
+      const response = await fetch(path);
+      if (!response.ok) throw new Error('File not found');
+      
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      
+      // Create download link with the actual filename
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+      
+      // Clean up
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      // Fallback: open in new tab if download fails
+      console.warn('Download failed, opening in new tab:', error);
+      window.open(path, '_blank');
+    }
   };
 
   return (
