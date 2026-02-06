@@ -1,10 +1,12 @@
-import { Smartphone, Lock, Zap, Users, ArrowRight, Check } from "lucide-react";
+import { Smartphone, Lock, Zap, Users, Download, Check, Apple, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { useNavigate } from "react-router-dom";
 
 const Keibo = () => {
-  const navigate = useNavigate();
+  const handleDownload = (platform: string) => {
+    // Handle platform-specific downloads
+    console.log(`Downloading for ${platform}`);
+  };
 
   const features = [
     {
@@ -38,36 +40,40 @@ const Keibo = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-950 to-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-[#0D1117] via-[#161B22] to-[#0D1117]">
       <main className="container mx-auto px-4 py-16">
         {/* Hero Section */}
         <div className="text-center mb-16 animate-fade-in">
-          <div className="inline-block px-4 py-2 bg-purple-500/20 text-purple-300 rounded-full text-sm font-semibold mb-6">
+          <div className="inline-block px-4 py-2 bg-[#FF7B00]/20 text-[#FF7B00] rounded-full text-sm font-semibold mb-6">
             ✨ Now Available
           </div>
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-[#FF7B00] to-[#58A6FF] bg-clip-text text-transparent">
             Welcome to Keibo
           </h1>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-[#C9D1D9] mb-8 max-w-2xl mx-auto">
             The next generation app that simplifies your daily tasks and enhances your productivity.
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
             <Button 
               size="lg" 
-              className="bg-purple-600 hover:bg-purple-700"
-              onClick={() => navigate('/keibo/join')}
+              className="bg-[#FF7B00] hover:bg-[#FF7B00]/90"
+              onClick={() => handleDownload('ios')}
             >
-              Get Started Free
-              <ArrowRight className="ml-2 h-5 w-5" />
+              <Apple className="mr-2 h-5 w-5" />
+              Download for iOS
             </Button>
             <Button 
               size="lg" 
-              variant="outline" 
-              className="border-gray-600 text-gray-300 hover:bg-gray-800"
+              className="bg-[#58A6FF] hover:bg-[#58A6FF]/90"
+              onClick={() => handleDownload('android')}
             >
-              Watch Demo
+              <Play className="mr-2 h-5 w-5" />
+              Download for Android
             </Button>
           </div>
+          <p className="text-sm text-[#8B949E] mt-4">
+            Free to download • Available on all platforms
+          </p>
         </div>
 
         {/* Features Grid */}
@@ -75,16 +81,16 @@ const Keibo = () => {
           {features.map((feature, index) => (
             <Card 
               key={index} 
-              className="bg-gray-800/50 backdrop-blur-sm border-gray-700 hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300 hover:-translate-y-1"
+              className="bg-[#161B22] backdrop-blur-sm border-[#30363D] hover:shadow-xl hover:shadow-[#FF7B00]/10 transition-all duration-300 hover:-translate-y-1"
             >
               <CardHeader>
-                <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center mb-4">
-                  <feature.icon className="h-6 w-6 text-purple-400" />
+                <div className="w-12 h-12 bg-[#FF7B00]/20 rounded-lg flex items-center justify-center mb-4">
+                  <feature.icon className="h-6 w-6 text-[#FF7B00]" />
                 </div>
-                <CardTitle className="text-lg text-white">{feature.title}</CardTitle>
+                <CardTitle className="text-lg text-[#C9D1D9]">{feature.title}</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription className="text-sm text-gray-400">
+                <CardDescription className="text-sm text-[#8B949E]">
                   {feature.description}
                 </CardDescription>
               </CardContent>
@@ -93,10 +99,10 @@ const Keibo = () => {
         </div>
 
         {/* Benefits Section */}
-        <Card className="bg-gradient-to-br from-purple-600/90 to-pink-600/90 text-white border-0 max-w-4xl mx-auto mb-16">
+        <Card className="bg-gradient-to-br from-[#FF7B00] to-[#58A6FF] text-white border-0 max-w-4xl mx-auto mb-16">
           <CardHeader>
             <CardTitle className="text-3xl text-white">Why Choose Keibo?</CardTitle>
-            <CardDescription className="text-purple-100 text-base">
+            <CardDescription className="text-white/80 text-base">
               Everything you need to get started and succeed
             </CardDescription>
           </CardHeader>
@@ -115,21 +121,23 @@ const Keibo = () => {
         </Card>
 
         {/* CTA Section */}
-        <div className="text-center bg-gray-800/50 backdrop-blur-sm rounded-2xl p-12 border border-gray-700">
-          <h2 className="text-4xl font-bold mb-4 text-white">Ready to Get Started?</h2>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Join our community today and experience the difference
+        <div className="text-center bg-[#161B22] backdrop-blur-sm rounded-2xl p-12 border border-[#30363D]">
+          <h2 className="text-4xl font-bold mb-4 text-[#C9D1D9]">Ready to Get Started?</h2>
+          <p className="text-xl text-[#8B949E] mb-8 max-w-2xl mx-auto">
+            Download Keibo today and join our growing community
           </p>
-          <Button 
-            size="lg" 
-            className="bg-purple-600 hover:bg-purple-700"
-            onClick={() => navigate('/keibo/join')}
-          >
-            Create Your Account
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
-          <p className="text-sm text-gray-400 mt-4">
-            No credit card required • Free to start
+          <div className="flex gap-4 justify-center flex-wrap">
+            <Button 
+              size="lg" 
+              className="bg-[#FF7B00] hover:bg-[#FF7B00]/90"
+              onClick={() => handleDownload('ios')}
+            >
+              <Download className="mr-2 h-5 w-5" />
+              Download Now
+            </Button>
+          </div>
+          <p className="text-sm text-[#8B949E] mt-4">
+            No account required to start • Instant access
           </p>
         </div>
       </main>
