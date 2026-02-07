@@ -6,30 +6,31 @@ import { useNavigate } from "react-router-dom";
 
 const KeiboJoin = () => {
   const navigate = useNavigate();
-  const [channelData, setChannelData] = useState({
-    name: "Community",
-    description: "Join our community",
-    members: "0",
-    type: "channel"
+  const [inviteData, setInviteData] = useState({
+    code: "",
+    groupName: "Community",
+    groupDesc: "Join our community",
+    members: "0"
   });
 
   useEffect(() => {
     // Extract data from URL parameters
     const params = new URLSearchParams(window.location.search);
-    const name = params.get('name') || params.get('channel') || "Community";
-    const description = params.get('description') || params.get('desc') || "Join our community";
-    const members = params.get('members') || params.get('subscribers') || "0";
-    const type = params.get('type') || "channel";
+    const code = params.get('code') || "";
+    const groupName = params.get('groupName') || "Community";
+    const groupDesc = params.get('groupDesc') || "Join our community";
+    const members = params.get('members') || "0";
     
-    setChannelData({ name, description, members, type });
+    setInviteData({ code, groupName, groupDesc, members });
   }, []);
 
   const handleJoin = () => {
-    // Redirect to open the app with the same URL
-    const currentUrl = window.location.href;
-    const keiboDeepLink = `keibo://join${window.location.search}`;
+    // Construct deep link with invite code
+    const keiboDeepLink = inviteData.code 
+      ? `keibo://invite?code=${inviteData.code}`
+      : `keibo://invite`;
     
-    // Try to open the app, fallback to app store if not installed
+    // Try to open the app
     window.location.href = keiboDeepLink;
     
     // Fallback to app download page after a short delay
@@ -47,17 +48,17 @@ const KeiboJoin = () => {
               <Users className="h-12 w-12 text-[#FF7B00]" />
             </div>
             <CardTitle className="text-3xl text-[#C9D1D9] mb-2">
-              {channelData.name}
+              {inviteData.groupName}
             </CardTitle>
             <CardDescription className="text-base text-[#8B949E]">
-              {channelData.description}
+              {inviteData.groupDesc}
             </CardDescription>
           </CardHeader>
           
           <CardContent className="space-y-6">
             <div className="text-center py-4 border-t border-b border-[#30363D]">
               <p className="text-[#8B949E] text-sm">
-                {channelData.members} {channelData.members === "1" ? "member" : "members"}
+                {inviteData.members} {inviteData.members === "1" ? "member" : "members"}
               </p>
             </div>
 
@@ -66,13 +67,18 @@ const KeiboJoin = () => {
               className="w-full bg-[#FF7B00] hover:bg-[#FF7B00]/90 text-white font-semibold py-6 text-lg"
               size="lg"
             >
-              JOIN {channelData.type.toUpperCase()}
+              JOIN GROUP
             </Button>
 
             <div className="text-center text-sm text-[#8B949E]">
               <p className="mb-4">
-                You are invited to the {channelData.type} <span className="text-[#C9D1D9] font-semibold">{channelData.name}</span>.
+                You are invited to the group <span className="text-[#C9D1D9] font-semibold">{inviteData.groupName}</span>.
               </p>
+              {inviteData.code && (
+                <p className="text-xs font-mono bg-[#0D1117] px-3 py-2 rounded border border-[#30363D] mb-4">
+                  Invite Code: {inviteData.code}
+                </p>
+              )}
               <p>Click above to join.</p>
             </div>
 
