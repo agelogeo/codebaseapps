@@ -1,8 +1,16 @@
-import { Code2, Menu, X } from "lucide-react";
+import { Code2, Menu, X, ChevronDown } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Navigation = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [appsDropdownOpen, setAppsDropdownOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const apps = [
+    { name: "OCC", path: "/occ" },
+    { name: "Keibo", path: "/keibo" },
+  ];
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -44,6 +52,35 @@ const Navigation = () => {
             >
               About
             </button>
+            
+            {/* Apps Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => setAppsDropdownOpen(!appsDropdownOpen)}
+                onBlur={() => setTimeout(() => setAppsDropdownOpen(false), 200)}
+                className="text-sm font-medium transition-colors hover:text-primary text-muted-foreground flex items-center gap-1"
+              >
+                Apps
+                <ChevronDown className={`h-4 w-4 transition-transform ${appsDropdownOpen ? 'rotate-180' : ''}`} />
+              </button>
+              
+              {appsDropdownOpen && (
+                <div className="absolute top-full mt-2 right-0 bg-background/95 backdrop-blur-md border border-border rounded-lg shadow-lg min-w-[150px] overflow-hidden">
+                  {apps.map((app) => (
+                    <button
+                      key={app.path}
+                      onClick={() => {
+                        navigate(app.path);
+                        setAppsDropdownOpen(false);
+                      }}
+                      className="w-full text-left px-4 py-2 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-primary transition-colors"
+                    >
+                      {app.name}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -72,6 +109,20 @@ const Navigation = () => {
               >
                 About
               </button>
+              
+              {/* Apps in Mobile Menu */}
+              {apps.map((app) => (
+                <button
+                  key={app.path}
+                  onClick={() => {
+                    navigate(app.path);
+                    setMobileMenuOpen(false);
+                  }}
+                  className="w-full text-sm font-medium transition-colors hover:text-primary text-muted-foreground text-left py-2"
+                >
+                  {app.name}
+                </button>
+              ))}
             </div>
           </div>
         )}

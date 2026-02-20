@@ -9,24 +9,30 @@ import NotFound from "./pages/NotFound";
 import OCC from "./pages/apps/OCC";
 import Keibo from "./pages/apps/Keibo";
 import KeiboJoin from "./pages/apps/KeiboJoin";
+import OCCPrivacy from "./pages/apps/legal/OCCPrivacy";
+import OCCTerms from "./pages/apps/legal/OCCTerms";
+import KeiboPrivacy from "./pages/apps/legal/KeiboPrivacy";
+import KeiboTerms from "./pages/apps/legal/KeiboTerms";
 
 const queryClient = new QueryClient();
 
 const App = () => {
-  const basename = import.meta.env.PROD ? "/codebaseapps" : "";
-  
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter basename={basename}>
+        <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<About />} />
             <Route path="/occ" element={<OCC />} />
+            <Route path="/occ/privacy" element={<OCCPrivacy />} />
+            <Route path="/occ/terms" element={<OCCTerms />} />
             <Route path="/keibo" element={<Keibo />} />
             <Route path="/keibo/join" element={<KeiboJoin />} />
+            <Route path="/keibo/privacy" element={<KeiboPrivacy />} />
+            <Route path="/keibo/terms" element={<KeiboTerms />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

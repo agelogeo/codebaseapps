@@ -1,8 +1,10 @@
-import { Smartphone, Lock, Zap, Users, Download, Check, Apple, Play } from "lucide-react";
+import { Smartphone, Lock, Zap, Users, Download, Check, Apple, Play, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useNavigate } from "react-router-dom";
 
 const Keibo = () => {
+  const navigate = useNavigate();
   const handleDownload = (platform: string) => {
     // Handle platform-specific downloads
     console.log(`Downloading for ${platform}`);
@@ -116,6 +118,36 @@ const Keibo = () => {
                   <span className="text-white">{benefit}</span>
                 </div>
               ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Legal Links Section */}
+        <Card className="bg-[#161B22] backdrop-blur-sm border-[#30363D] max-w-3xl mx-auto mb-16">
+          <CardHeader>
+            <CardTitle className="text-2xl text-[#C9D1D9]">Legal & Support</CardTitle>
+            <CardDescription className="text-[#8B949E]">
+              Review our terms, privacy policy, and support resources
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button 
+                variant="outline" 
+                className="flex-1 justify-start border-[#30363D] text-[#C9D1D9] hover:bg-[#30363D]"
+                onClick={() => navigate('/keibo/privacy')}
+              >
+                <FileText className="mr-2 h-4 w-4" />
+                Privacy Policy
+              </Button>
+              <Button 
+                variant="outline" 
+                className="flex-1 justify-start border-[#30363D] text-[#C9D1D9] hover:bg-[#30363D]"
+                onClick={() => navigate('/keibo/terms')}
+              >
+                <FileText className="mr-2 h-4 w-4" />
+                Terms of Service
+              </Button>
             </div>
           </CardContent>
         </Card>

@@ -1,12 +1,10 @@
 import { Shield, FileText, Download, ExternalLink, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useNavigate } from "react-router-dom";
 
 const OCC = () => {
-  const getAssetPath = (path: string) => {
-    const base = import.meta.env.BASE_URL || '/';
-    return base + path.replace(/^\//, '');
-  };
+  const navigate = useNavigate();
 
   const features = [
     {
@@ -84,31 +82,20 @@ const OCC = () => {
               <Button 
                 variant="outline" 
                 className="flex-1 justify-start"
-                onClick={() => window.open(getAssetPath('legal/occ/privacy-policy.html'), '_blank')}
+                onClick={() => navigate('/occ/privacy')}
               >
                 <FileText className="mr-2 h-4 w-4" />
                 Privacy Policy
-                <ExternalLink className="ml-auto h-4 w-4" />
               </Button>
               <Button 
                 variant="outline" 
                 className="flex-1 justify-start"
-                onClick={() => window.open(getAssetPath('legal/occ/terms-of-service.html'), '_blank')}
+                onClick={() => navigate('/occ/terms')}
               >
                 <FileText className="mr-2 h-4 w-4" />
                 Terms of Service
-                <ExternalLink className="ml-auto h-4 w-4" />
               </Button>
             </div>
-            <Button 
-              variant="outline" 
-              className="w-full justify-start"
-              onClick={() => window.open(getAssetPath('legal/occ/legal-combined.html'), '_blank')}
-            >
-              <FileText className="mr-2 h-4 w-4" />
-              View All Legal Documents
-              <ExternalLink className="ml-auto h-4 w-4" />
-            </Button>
           </CardContent>
         </Card>
 
