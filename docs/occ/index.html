@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCC App - Codebase Apps</title>
+    <meta name="description" content="OCC - Your reliable companion for productivity and organization.">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* OCC-specific blue theme */
+        .occ-gradient {
+            background: linear-gradient(135deg, hsl(220, 30%, 10%) 0%, hsl(220, 60%, 15%) 50%, hsl(220, 30%, 10%) 100%);
+        }
+        .occ-card {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        .occ-card:hover {
+            background: rgba(30, 41, 59, 0.8);
+            box-shadow: 0 10px 40px -5px rgba(59, 130, 246, 0.3);
+            transform: translateY(-4px);
+        }
+        .occ-btn-primary {
+            background: hsl(217, 91%, 60%);
+            color: white;
+        }
+        .occ-btn-primary:hover {
+            background: hsl(217, 91%, 50%);
+        }
+        .occ-btn-outline {
+            background: transparent;
+            color: hsl(217, 91%, 60%);
+            border: 1px solid hsl(217, 91%, 60%);
+        }
+        .occ-btn-outline:hover {
+            background: hsl(217, 91%, 60%);
+            color: white;
+        }
+        .occ-icon-bg {
+            background: rgba(59, 130, 246, 0.1);
+        }
+        .occ-text-accent {
+            color: hsl(213, 94%, 68%);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="navbar-brand">
+                <div class="navbar-logo" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px;">
+                    <i data-lucide="code-2" style="width: 24px; height: 24px; color: white; flex-shrink: 0;"></i>
+                </div>
+                <span>Codebase Apps</span>
+            </a>
+            
+            <ul class="navbar-nav">
+                <li><a href="../index.html#home">Home</a></li>
+                <li><a href="../index.html#about">About</a></li>
+                <li class="dropdown">
+                    <button class="dropdown-toggle" id="appsDropdown">
+                        Apps
+                        <i data-lucide="chevron-down" style="width: 16px; height: 16px;"></i>
+                    </button>
+                    <div class="dropdown-menu" id="appsMenu">
+                        <a href="index.html">OCC</a>
+                        <a href="../keibo/index.html">Keibo</a>
+                    </div>
+                </li>
+            </ul>
+            
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i data-lucide="menu" style="width: 24px; height: 24px;"></i>
+            </button>
+        </div>
+        
+        <div class="mobile-nav" id="mobileNav">
+            <a href="../index.html#home">Home</a>
+            <a href="../index.html#about">About</a>
+            <a href="index.html">OCC</a>
+            <a href="../keibo/index.html">Keibo</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="occ-gradient" style="min-height: 100vh; padding-top: 6rem; padding-bottom: 3rem;">
+        <div class="container">
+            <!-- Hero -->
+            <div class="text-center animate-fade-in" style="margin-bottom: 4rem;">
+                <h1 style="font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 700; margin-bottom: 1.5rem; background: linear-gradient(to right, hsl(213, 94%, 68%), hsl(271, 91%, 65%)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                    OCC App
+                </h1>
+                <p style="font-size: clamp(1rem, 3vw, 1.25rem); color: hsl(210, 15%, 75%); max-width: 700px; margin: 0 auto 2rem;">
+                    Your reliable companion for productivity and organization
+                </p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <button class="btn occ-btn-primary">
+                        <i data-lucide="download" style="width: 20px; height: 20px;"></i>
+                        Download for iOS
+                    </button>
+                    <button class="btn occ-btn-outline">
+                        <i data-lucide="download" style="width: 20px; height: 20px;"></i>
+                        Download for Android
+                    </button>
+                </div>
+            </div>
+
+            <!-- Features Grid -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 4rem; max-width: 1200px; margin-left: auto; margin-right: auto;">
+                <!-- Feature 1 -->
+                <div class="occ-card" style="padding: 2rem; border-radius: 1rem; transition: all 0.3s;">
+                    <div class="occ-icon-bg" style="width: 48px; height: 48px; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                        <i data-lucide="shield" class="occ-text-accent" style="width: 24px; height: 24px;"></i>
+                    </div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; color: white; margin-bottom: 0.5rem;">Secure & Private</h3>
+                    <p style="color: hsl(210, 15%, 65%);">Your data is encrypted and stays private. We never share your information.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="occ-card" style="padding: 2rem; border-radius: 1rem; transition: all 0.3s;">
+                    <div class="occ-icon-bg" style="width: 48px; height: 48px; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                        <i data-lucide="file-text" class="occ-text-accent" style="width: 24px; height: 24px;"></i>
+                    </div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; color: white; margin-bottom: 0.5rem;">Easy to Use</h3>
+                    <p style="color: hsl(210, 15%, 65%);">Simple, intuitive interface designed for everyone.</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="occ-card" style="padding: 2rem; border-radius: 1rem; transition: all 0.3s;">
+                    <div class="occ-icon-bg" style="width: 48px; height: 48px; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                        <i data-lucide="check" class="occ-text-accent" style="width: 24px; height: 24px;"></i>
+                    </div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; color: white; margin-bottom: 0.5rem;">Reliable</h3>
+                    <p style="color: hsl(210, 15%, 65%);">Built with modern technology for consistent performance.</p>
+                </div>
+            </div>
+
+            <!-- Legal Links Section -->
+            <div class="occ-card" style="max-width: 800px; margin: 0 auto; padding: 2rem; border-radius: 1rem;">
+                <div style="margin-bottom: 1.5rem;">
+                    <h2 style="font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: 0.5rem;">Legal & Support</h2>
+                    <p style="color: hsl(210, 15%, 65%);">Review our terms, privacy policy, and support resources</p>
+                </div>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="privacy.html" class="btn btn-outline" style="flex: 1; min-width: 200px; justify-content: flex-start;">
+                        <i data-lucide="file-text" style="width: 16px; height: 16px;"></i>
+                        Privacy Policy
+                    </a>
+                    <a href="terms.html" class="btn btn-outline" style="flex: 1; min-width: 200px; justify-content: flex-start;">
+                        <i data-lucide="file-text" style="width: 16px; height: 16px;"></i>
+                        Terms of Service
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Codebase Apps. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        lucide.createIcons();
+        
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mobileNav = document.getElementById('mobileNav');
+        const appsDropdown = document.getElementById('appsDropdown');
+        const appsMenu = document.getElementById('appsMenu');
+        
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileNav.classList.toggle('show');
+        });
+        
+        appsDropdown.addEventListener('click', () => {
+            appsMenu.classList.toggle('show');
+        });
+        
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.dropdown')) {
+                appsMenu.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>

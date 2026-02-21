@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keibo - Next Generation Productivity App</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .keibo-gradient {
+            background: linear-gradient(135deg, #0D1117 0%, #161B22 50%, #0D1117 100%);
+            min-height: 100vh;
+        }
+        .badge-orange {
+            background: rgba(255, 123, 0, 0.2);
+            color: #FF7B00;
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #FF7B00 0%, #58A6FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .btn-orange {
+            background: #FF7B00;
+            color: white;
+            padding: 0.875rem 1.75rem;
+            border-radius: 0.75rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-orange:hover {
+            background: rgba(255, 123, 0, 0.9);
+            transform: translateY(-2px);
+        }
+        .btn-blue {
+            background: #58A6FF;
+            color: white;
+            padding: 0.875rem 1.75rem;
+            border-radius: 0.75rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-blue:hover {
+            background: rgba(88, 166, 255, 0.9);
+            transform: translateY(-2px);
+        }
+        .feature-icon-orange {
+            width: 3rem;
+            height: 3rem;
+            background: rgba(255, 123, 0, 0.2);
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .feature-icon-orange i {
+            color: #FF7B00;
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+        .benefits-card {
+            background: linear-gradient(135deg, #FF7B00 0%, #58A6FF 100%);
+            border-radius: 1rem;
+            padding: 2.5rem;
+            color: white;
+            margin-bottom: 3rem;
+        }
+        .check-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .check-icon i {
+            color: white;
+            width: 1rem;
+            height: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="keibo-gradient">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="../index.html" class="nav-logo">
+                    <div style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <i data-lucide="code-2" style="width: 28px; height: 28px;"></i>
+                    </div>
+                    <span class="nav-title">Codebase Apps</span>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="../index.html#features">Features</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Apps
+                            <i data-lucide="chevron-down" class="chevron-icon"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="../keibo/index.html">Keibo</a></li>
+                            <li><a href="../keibo/join.html">Keibo Join</a></li>
+                            <li><a href="../occ/index.html">OCC</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../index.html#contact">Contact</a></li>
+                </ul>
+                <button class="mobile-toggle" id="mobileToggle">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="section" style="padding-top: 8rem; padding-bottom: 4rem;">
+            <div class="container" style="max-width: 900px; text-align: center;">
+                <div class="badge-orange">✨ Now Available</div>
+                <h1 class="gradient-text" style="font-size: 3.5rem; font-weight: 700; margin-bottom: 1.5rem;">
+                    Welcome to Keibo
+                </h1>
+                <p style="font-size: 1.25rem; color: #C9D1D9; margin-bottom: 2rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+                    The next generation app that simplifies your daily tasks and enhances your productivity.
+                </p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem;">
+                    <button class="btn-orange" onclick="handleDownload('ios')">
+                        <i data-lucide="apple" style="width: 20px; height: 20px;"></i>
+                        Download for iOS
+                    </button>
+                    <button class="btn-blue" onclick="handleDownload('android')">
+                        <i data-lucide="play" style="width: 20px; height: 20px;"></i>
+                        Download for Android
+                    </button>
+                </div>
+                <p style="font-size: 0.875rem; color: #8B949E; margin-top: 1rem;">
+                    Free to download • Available on all platforms
+                </p>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="section">
+            <div class="container">
+                <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                    <div class="card">
+                        <div class="feature-icon-orange">
+                            <i data-lucide="smartphone"></i>
+                        </div>
+                        <h3 style="font-size: 1.125rem; font-weight: 600; color: #C9D1D9; margin-bottom: 0.75rem;">Mobile First</h3>
+                        <p style="color: #8B949E; font-size: 0.875rem;">
+                            Designed for your smartphone with a seamless experience on any device.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <div class="feature-icon-orange">
+                            <i data-lucide="lock"></i>
+                        </div>
+                        <h3 style="font-size: 1.125rem; font-weight: 600; color: #C9D1D9; margin-bottom: 0.75rem;">Secure by Default</h3>
+                        <p style="color: #8B949E; font-size: 0.875rem;">
+                            Bank-level encryption keeps your information safe and secure.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <div class="feature-icon-orange">
+                            <i data-lucide="zap"></i>
+                        </div>
+                        <h3 style="font-size: 1.125rem; font-weight: 600; color: #C9D1D9; margin-bottom: 0.75rem;">Lightning Fast</h3>
+                        <p style="color: #8B949E; font-size: 0.875rem;">
+                            Optimized performance for quick access and smooth interactions.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <div class="feature-icon-orange">
+                            <i data-lucide="users"></i>
+                        </div>
+                        <h3 style="font-size: 1.125rem; font-weight: 600; color: #C9D1D9; margin-bottom: 0.75rem;">Community Driven</h3>
+                        <p style="color: #8B949E; font-size: 0.875rem;">
+                            Join thousands of users and be part of our growing community.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="section">
+            <div class="container" style="max-width: 900px;">
+                <div class="benefits-card">
+                    <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">Why Choose Keibo?</h2>
+                    <p style="font-size: 1rem; opacity: 0.9; margin-bottom: 2rem;">
+                        Everything you need to get started and succeed
+                    </p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                            <div class="check-icon">
+                                <i data-lucide="check"></i>
+                            </div>
+                            <span>Easy setup in minutes</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                            <div class="check-icon">
+                                <i data-lucide="check"></i>
+                            </div>
+                            <span>No credit card required</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                            <div class="check-icon">
+                                <i data-lucide="check"></i>
+                            </div>
+                            <span>Regular updates and improvements</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                            <div class="check-icon">
+                                <i data-lucide="check"></i>
+                            </div>
+                            <span>24/7 customer support</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                            <div class="check-icon">
+                                <i data-lucide="check"></i>
+                            </div>
+                            <span>Cross-platform compatibility</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Legal Links Section -->
+        <section class="section">
+            <div class="container" style="max-width: 700px;">
+                <div class="card" style="padding: 2rem;">
+                    <h2 style="font-size: 1.75rem; font-weight: 600; color: #C9D1D9; margin-bottom: 0.75rem;">Legal & Support</h2>
+                    <p style="color: #8B949E; margin-bottom: 2rem;">
+                        Review our terms, privacy policy, and support resources
+                    </p>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <a href="privacy.html" class="card" style="flex: 1; min-width: 250px; padding: 1rem; text-decoration: none; display: flex; align-items: center; gap: 0.75rem; border: 1px solid #30363D; transition: all 0.3s;">
+                            <i data-lucide="file-text" style="width: 20px; height: 20px; color: #FF7B00;"></i>
+                            <span style="color: #C9D1D9;">Privacy Policy</span>
+                        </a>
+                        <a href="terms.html" class="card" style="flex: 1; min-width: 250px; padding: 1rem; text-decoration: none; display: flex; align-items: center; gap: 0.75rem; border: 1px solid #30363D; transition: all 0.3s;">
+                            <i data-lucide="file-text" style="width: 20px; height: 20px; color: #FF7B00;"></i>
+                            <span style="color: #C9D1D9;">Terms of Service</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="section" style="padding-bottom: 6rem;">
+            <div class="container" style="max-width: 900px;">
+                <div class="card" style="padding: 3rem; text-align: center; border: 1px solid #30363D;">
+                    <h2 style="font-size: 2.5rem; font-weight: 700; color: #C9D1D9; margin-bottom: 1rem;">
+                        Ready to Get Started?
+                    </h2>
+                    <p style="font-size: 1.25rem; color: #8B949E; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                        Download Keibo today and join our growing community
+                    </p>
+                    <button class="btn-orange" onclick="handleDownload('ios')">
+                        <i data-lucide="download" style="width: 20px; height: 20px;"></i>
+                        Download Now
+                    </button>
+                    <p style="font-size: 0.875rem; color: #8B949E; margin-top: 1rem;">
+                        No account required to start • Instant access
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container" style="text-align: center;">
+                <p>&copy; 2025 Codebase Apps. All rights reserved.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.875rem; opacity: 0.7;">
+                    Ο.Ε. Codebase Apps | ΓΕΜΗ: 164043006000
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Mobile menu toggle
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            const navMenu = document.querySelector('.nav-menu');
+            navMenu.classList.toggle('active');
+        });
+
+        // Dropdown menu toggle
+        document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+            toggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                const dropdown = this.parentElement;
+                dropdown.classList.toggle('active');
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const navbar = document.querySelector('.navbar');
+            const mobileToggle = document.getElementById('mobileToggle');
+            if (!navbar.contains(e.target) && !mobileToggle.contains(e.target)) {
+                document.querySelector('.nav-menu').classList.remove('active');
+            }
+        });
+
+        // Handle download clicks
+        function handleDownload(platform) {
+            console.log(`Download for ${platform}`);
+            alert(`Download link for ${platform} will be available soon!`);
+        }
+    </script>
+</body>
+</html>

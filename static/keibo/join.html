@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Group - Keibo</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .join-page {
+            background: linear-gradient(135deg, #0D1117 0%, #161B22 50%, #0D1117 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
+        .join-container {
+            max-width: 500px;
+            width: 100%;
+        }
+        .join-card {
+            background: rgba(22, 27, 34, 0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid #30363D;
+            border-radius: 1rem;
+            padding: 2.5rem;
+            box-shadow: 0 20px 60px -10px rgba(0, 0, 0, 0.5);
+        }
+        .group-icon {
+            width: 6rem;
+            height: 6rem;
+            background: rgba(255, 123, 0, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            border: 4px solid rgba(255, 123, 0, 0.3);
+        }
+        .group-icon i {
+            width: 3rem;
+            height: 3rem;
+            color: #FF7B00;
+        }
+        .join-btn {
+            width: 100%;
+            background: #FF7B00;
+            color: white;
+            padding: 1.25rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            font-size: 1.125rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .join-btn:hover {
+            background: rgba(255, 123, 0, 0.9);
+            transform: translateY(-2px);
+        }
+        .invite-code-box {
+            background: #0D1117;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #30363D;
+            font-family: monospace;
+            font-size: 0.875rem;
+            color: #C9D1D9;
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .divider {
+            border-top: 1px solid #30363D;
+            margin: 1.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="join-page">
+        <div class="join-container">
+            <div class="join-card">
+                <!-- Group Icon -->
+                <div class="group-icon">
+                    <i data-lucide="users"></i>
+                </div>
+
+                <!-- Group Info -->
+                <h1 id="groupName" style="font-size: 2rem; font-weight: 700; color: #C9D1D9; text-align: center; margin-bottom: 0.5rem;">
+                    Community
+                </h1>
+                <p id="groupDesc" style="font-size: 1rem; color: #8B949E; text-align: center; margin-bottom: 1.5rem;">
+                    Join our community
+                </p>
+
+                <!-- Members Count -->
+                <div class="divider"></div>
+                <p id="membersCount" style="text-align: center; color: #8B949E; font-size: 0.875rem; margin: 1rem 0;">
+                    0 members
+                </p>
+                <div class="divider"></div>
+
+                <!-- Join Button -->
+                <button onclick="handleJoin()" class="join-btn">
+                    JOIN GROUP
+                </button>
+
+                <!-- Invite Details -->
+                <div style="margin-top: 1.5rem; text-align: center;">
+                    <p style="font-size: 0.875rem; color: #8B949E; margin-bottom: 1rem;">
+                        You are invited to the group <span id="groupNameRepeat" style="color: #C9D1D9; font-weight: 600;">Community</span>.
+                    </p>
+                    <div id="inviteCodeContainer" style="display: none;">
+                        <div class="invite-code-box">
+                            Invite Code: <span id="inviteCode"></span>
+                        </div>
+                    </div>
+                    <p style="font-size: 0.875rem; color: #8B949E;">
+                        Click above to join.
+                    </p>
+                </div>
+
+                <!-- Download App Link -->
+                <div class="divider"></div>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-size: 0.875rem; color: #8B949E;">
+                    <i data-lucide="download" style="width: 16px; height: 16px;"></i>
+                    <span>Don't have Keibo?</span>
+                    <a href="index.html" style="color: #58A6FF; font-weight: 500; text-decoration: underline;">
+                        Download App
+                    </a>
+                </div>
+            </div>
+
+            <!-- Powered By -->
+            <div style="margin-top: 1.5rem; text-align: center;">
+                <p style="font-size: 0.75rem; color: #8B949E;">
+                    Powered by <span style="color: #FF7B00; font-weight: 600;">Keibo</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Extract URL parameters
+        const params = new URLSearchParams(window.location.search);
+        const code = params.get('code') || '';
+        const groupName = params.get('groupName') || 'Community';
+        const groupDesc = params.get('groupDesc') || 'Join our community';
+        const members = params.get('members') || '0';
+
+        // Update page content
+        document.getElementById('groupName').textContent = groupName;
+        document.getElementById('groupDesc').textContent = groupDesc;
+        document.getElementById('groupNameRepeat').textContent = groupName;
+        document.getElementById('membersCount').textContent = members + (members === '1' ? ' member' : ' members');
+
+        // Show invite code if present
+        if (code) {
+            document.getElementById('inviteCodeContainer').style.display = 'block';
+            document.getElementById('inviteCode').textContent = code;
+        }
+
+        // Handle join button click
+        function handleJoin() {
+            // Construct deep link
+            const deepLink = code 
+                ? `keibo://invite?code=${code}`
+                : 'keibo://invite';
+            
+            // Try to open the app
+            window.location.href = deepLink;
+            
+            // Fallback to app download page after delay
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
