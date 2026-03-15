@@ -1,0 +1,26 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "YOURTEAMID.com.codebaseapps.keiboapp",
+        "paths": [
+          "/keibo/join*",
+          "/keibo/*"
+        ]
+      },
+      {
+        "appID": "YOURTEAMID.com.codebaseapps.occ",
+        "paths": [
+          "/occ/*"
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+      "YOURTEAMID.com.codebaseapps.keiboapp",
+      "YOURTEAMID.com.codebaseapps.occ"
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.codebaseapps.keiboapp",
+      "sha256_cert_fingerprints": [
+        "YOUR_KEIBO_SHA256_FINGERPRINT"
+      ]
+    }
+  },
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.codebaseapps.occ",
+      "sha256_cert_fingerprints": [
+        "YOUR_OCC_SHA256_FINGERPRINT"
+      ]
+    }
+  }
+]

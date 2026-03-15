@@ -1,0 +1,26 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "3V97BPKP8Z.com.codebaseapps.keiboapp",
+        "paths": [
+          "/keibo/join*",
+          "/keibo/*"
+        ]
+      },
+      {
+        "appID": "3V97BPKP8Z.com.codebaseapps.occ",
+        "paths": [
+          "/occ/*"
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+      "3V97BPKP8Z.com.codebaseapps.keiboapp",
+      "3V97BPKP8Z.com.codebaseapps.occ"
+    ]
+  }
+}
