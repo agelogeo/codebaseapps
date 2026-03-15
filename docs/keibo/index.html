@@ -106,32 +106,39 @@
     <div class="keibo-gradient">
         <!-- Navigation -->
         <nav class="navbar">
-            <div class="nav-container">
-                <a href="../index.html" class="nav-logo">
-                    <div style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                        <i data-lucide="code-2" style="width: 28px; height: 28px;"></i>
+            <div class="container">
+                <a href="../index.html" class="navbar-brand">
+                    <div class="navbar-logo" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px;">
+                        <i data-lucide="code-2" style="width: 24px; height: 24px; color: white; flex-shrink: 0;"></i>
                     </div>
-                    <span class="nav-title">Codebase Apps</span>
+                    <span>Codebase Apps</span>
                 </a>
-                <ul class="nav-menu">
-                    <li><a href="../index.html#features">Features</a></li>
+                
+                <ul class="navbar-nav">
+                    <li><a href="../index.html#home">Home</a></li>
                     <li><a href="../index.html#about">About</a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle">
+                        <button class="dropdown-toggle" id="appsDropdown">
                             Apps
-                            <i data-lucide="chevron-down" class="chevron-icon"></i>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="../keibo/index.html">Keibo</a></li>
-                            <li><a href="../keibo/join.html">Keibo Join</a></li>
-                            <li><a href="../occ/index.html">OCC</a></li>
-                        </ul>
+                            <i data-lucide="chevron-down" style="width: 16px; height: 16px;"></i>
+                        </button>
+                        <div class="dropdown-menu" id="appsMenu">
+                            <a href="index.html">Keibo</a>
+                            <a href="../occ/index.html">OCC</a>
+                        </div>
                     </li>
-                    <li><a href="../index.html#contact">Contact</a></li>
                 </ul>
-                <button class="mobile-toggle" id="mobileToggle">
-                    <i data-lucide="menu"></i>
+                
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i data-lucide="menu" style="width: 24px; height: 24px;"></i>
                 </button>
+            </div>
+            
+            <div class="mobile-nav" id="mobileNav">
+                <a href="../index.html#home">Home</a>
+                <a href="../index.html#about">About</a>
+                <a href="index.html">Keibo</a>
+                <a href="../occ/index.html">OCC</a>
             </div>
         </nav>
 
@@ -305,28 +312,23 @@
 
     <script>
         lucide.createIcons();
-
-        // Mobile menu toggle
-        document.getElementById('mobileToggle').addEventListener('click', function() {
-            const navMenu = document.querySelector('.nav-menu');
-            navMenu.classList.toggle('active');
+        
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mobileNav = document.getElementById('mobileNav');
+        const appsDropdown = document.getElementById('appsDropdown');
+        const appsMenu = document.getElementById('appsMenu');
+        
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileNav.classList.toggle('show');
         });
-
-        // Dropdown menu toggle
-        document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
-            toggle.addEventListener('click', function(e) {
-                e.preventDefault();
-                const dropdown = this.parentElement;
-                dropdown.classList.toggle('active');
-            });
+        
+        appsDropdown.addEventListener('click', () => {
+            appsMenu.classList.toggle('show');
         });
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(e) {
-            const navbar = document.querySelector('.navbar');
-            const mobileToggle = document.getElementById('mobileToggle');
-            if (!navbar.contains(e.target) && !mobileToggle.contains(e.target)) {
-                document.querySelector('.nav-menu').classList.remove('active');
+        
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.dropdown')) {
+                appsMenu.classList.remove('show');
             }
         });
 
