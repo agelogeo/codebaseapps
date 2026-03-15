@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../theme/app_theme.dart';
+import '../../shared/smart_app_banner.dart';
+
+const _keiboAppStoreId = '6755344228';
 
 class KeiboJoinPage extends StatefulWidget {
   const KeiboJoinPage({super.key});
@@ -23,6 +26,17 @@ class _KeiboJoinPageState extends State<KeiboJoinPage> {
     groupName = params['groupName'] ?? 'Community';
     groupDesc = params['groupDesc'] ?? 'Join our community';
     members = params['members'] ?? '0';
+
+    SmartAppBanner.show(
+      appId: _keiboAppStoreId,
+      appArgument: 'keibo://join?code=$code',
+    );
+  }
+
+  @override
+  void dispose() {
+    SmartAppBanner.remove();
+    super.dispose();
   }
 
   @override

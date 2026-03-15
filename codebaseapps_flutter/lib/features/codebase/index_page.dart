@@ -629,10 +629,8 @@ class IndexPage extends StatelessWidget {
   Widget _downloadButton(String path, String title) {
     return ElevatedButton.icon(
       onPressed: () async {
-        final uri = Uri.parse(path);
-        if (await canLaunchUrl(uri)) {
-          await launchUrl(uri, mode: LaunchMode.externalApplication);
-        }
+        final uri = Uri.base.resolve(path);
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
       },
       icon: const Icon(Icons.download, size: 16),
       label: const Text('Download'),

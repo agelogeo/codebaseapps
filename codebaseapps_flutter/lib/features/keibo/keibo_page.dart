@@ -1,10 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../theme/app_theme.dart';
 import '../../shared/cards.dart';
+import '../../shared/navigation.dart';
+import '../../shared/platform_utils.dart';
+import '../../shared/smart_app_banner.dart';
 
-class KeiboPage extends StatelessWidget {
+const _keiboAppStoreId = '6755344228';
+const _keiboAppStoreUrl = 'https://apps.apple.com/app/id$_keiboAppStoreId';
+const _keiboPlayStoreUrl =
+    'https://play.google.com/store/apps/details?id=com.codebaseapps.keiboapp';
+
+class KeiboPage extends StatefulWidget {
   const KeiboPage({super.key});
+
+  @override
+  State<KeiboPage> createState() => _KeiboPageState();
+}
+
+class _KeiboPageState extends State<KeiboPage> {
+  @override
+  void initState() {
+    super.initState();
+    SmartAppBanner.show(appId: _keiboAppStoreId);
+  }
+
+  @override
+  void dispose() {
+    SmartAppBanner.remove();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +45,7 @@ class KeiboPage extends StatelessWidget {
         ),
         child: Column(
           children: [
-            _buildSubNav(context),
+            const AppNavigation(),
             Expanded(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.all(24),
@@ -45,88 +71,6 @@ class KeiboPage extends StatelessWidget {
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSubNav(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.keiboBg.withAlpha(200),
-        border: const Border(bottom: BorderSide(color: AppColors.keiboBorder)),
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-      child: SafeArea(
-        bottom: false,
-        child: Row(
-          children: [
-            MouseRegion(
-              cursor: SystemMouseCursors.click,
-              child: GestureDetector(
-                onTap: () => context.go('/'),
-                child: Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          colors: [AppColors.primary, AppColors.gradientEnd],
-                        ),
-                        borderRadius: BorderRadius.circular(8),
-                        boxShadow: const [
-                          BoxShadow(color: AppColors.glowColor, blurRadius: 20),
-                        ],
-                      ),
-                      child: const Icon(
-                        Icons.code,
-                        color: Colors.white,
-                        size: 24,
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    const Text(
-                      'Codebase Apps',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.foreground,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const Spacer(),
-            Row(
-              children: [
-                _navLink('Home', () => context.go('/')),
-                const SizedBox(width: 24),
-                _navLink('About', () => context.go('/')),
-                const SizedBox(width: 24),
-                _navLink('Apps', null),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _navLink(String label, VoidCallback? onTap) {
-    return MouseRegion(
-      cursor: onTap != null
-          ? SystemMouseCursors.click
-          : SystemMouseCursors.basic,
-      child: GestureDetector(
-        onTap: onTap,
-        child: Text(
-          label,
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-            color: AppColors.mutedForeground,
-          ),
         ),
       ),
     );
@@ -172,45 +116,7 @@ class KeiboPage extends StatelessWidget {
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 32),
-        Wrap(
-          spacing: 16,
-          runSpacing: 12,
-          alignment: WrapAlignment.center,
-          children: [
-            ElevatedButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.apple, size: 20),
-              label: const Text('Download for iOS'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.keiboOrange,
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 16,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-            ),
-            ElevatedButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.play_arrow, size: 20),
-              label: const Text('Download for Android'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.keiboBlue,
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 16,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-            ),
-          ],
-        ),
+        _buildDownloadButtons(),
         const SizedBox(height: 16),
         const Text(
           'Free to download • Available on all platforms',
@@ -516,19 +422,7 @@ class KeiboPage extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 32),
-          ElevatedButton.icon(
-            onPressed: () {},
-            icon: const Icon(Icons.download, size: 20),
-            label: const Text('Download Now'),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.keiboOrange,
-              foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ),
-          ),
+          _buildCtaButton(),
           const SizedBox(height: 16),
           const Text(
             'No account required to start • Instant access',
@@ -538,6 +432,105 @@ class KeiboPage extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget _buildDownloadButtons() {
+  final platform = PlatformUtils.current;
+
+  if (platform == UserPlatform.ios) {
+    return _storeButton(
+      label: 'Download on the App Store',
+      icon: Icons.apple,
+      url: _keiboAppStoreUrl,
+      color: AppColors.keiboOrange,
+    );
+  }
+
+  if (platform == UserPlatform.android) {
+    return _storeButton(
+      label: 'Get it on Google Play',
+      icon: Icons.play_arrow,
+      url: _keiboPlayStoreUrl,
+      color: AppColors.keiboBlue,
+    );
+  }
+
+  // Desktop: show both
+  return Wrap(
+    spacing: 16,
+    runSpacing: 12,
+    alignment: WrapAlignment.center,
+    children: [
+      _storeButton(
+        label: 'Download for iOS',
+        icon: Icons.apple,
+        url: _keiboAppStoreUrl,
+        color: AppColors.keiboOrange,
+      ),
+      _storeButton(
+        label: 'Download for Android',
+        icon: Icons.play_arrow,
+        url: _keiboPlayStoreUrl,
+        color: AppColors.keiboBlue,
+      ),
+    ],
+  );
+}
+
+Widget _storeButton({
+  required String label,
+  required IconData icon,
+  required String url,
+  required Color color,
+}) {
+  return ElevatedButton.icon(
+    onPressed: () async {
+      final uri = Uri.parse(url);
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      }
+    },
+    icon: Icon(icon, size: 20),
+    label: Text(label),
+    style: ElevatedButton.styleFrom(
+      backgroundColor: color,
+      foregroundColor: Colors.white,
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+    ),
+  );
+}
+
+Widget _buildCtaButton() {
+  final platform = PlatformUtils.current;
+  String label;
+  String url;
+  if (platform == UserPlatform.ios) {
+    label = 'Download on the App Store';
+    url = _keiboAppStoreUrl;
+  } else if (platform == UserPlatform.android) {
+    label = 'Get it on Google Play';
+    url = _keiboPlayStoreUrl;
+  } else {
+    label = 'Download Now';
+    url = _keiboAppStoreUrl;
+  }
+  return ElevatedButton.icon(
+    onPressed: () async {
+      final uri = Uri.parse(url);
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      }
+    },
+    icon: const Icon(Icons.download, size: 20),
+    label: Text(label),
+    style: ElevatedButton.styleFrom(
+      backgroundColor: AppColors.keiboOrange,
+      foregroundColor: Colors.white,
+      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+    ),
+  );
 }
 
 class _F {

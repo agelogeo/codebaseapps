@@ -11,9 +11,6 @@ class AppNavigation extends StatefulWidget {
 
 class _AppNavigationState extends State<AppNavigation> {
   bool _mobileMenuOpen = false;
-  bool _appsDropdownOpen = false;
-  final _appsDropdownKey = GlobalKey();
-  OverlayEntry? _dropdownOverlay;
 
   void _toggleMobileMenu() {
     setState(() {
@@ -21,92 +18,11 @@ class _AppNavigationState extends State<AppNavigation> {
     });
   }
 
-  void _showAppsDropdown() {
-    _removeDropdownOverlay();
-    final renderBox =
-        _appsDropdownKey.currentContext?.findRenderObject() as RenderBox?;
-    if (renderBox == null) return;
-    final offset = renderBox.localToGlobal(Offset.zero);
-    final size = renderBox.size;
-
-    _dropdownOverlay = OverlayEntry(
-      builder: (context) => Stack(
-        children: [
-          Positioned.fill(
-            child: GestureDetector(
-              onTap: _removeDropdownOverlay,
-              behavior: HitTestBehavior.opaque,
-              child: const SizedBox.expand(),
-            ),
-          ),
-          Positioned(
-            top: offset.dy + size.height + 8,
-            left: offset.dx,
-            child: Material(
-              color: Colors.transparent,
-              child: Container(
-                width: 150,
-                decoration: BoxDecoration(
-                  color: AppColors.background.withAlpha(240),
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: AppColors.border),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withAlpha(100),
-                      blurRadius: 12,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    _dropdownItem('OCC', '/occ'),
-                    _dropdownItem('Keibo', '/keibo'),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-    Overlay.of(context).insert(_dropdownOverlay!);
-    setState(() => _appsDropdownOpen = true);
-  }
-
-  void _removeDropdownOverlay() {
-    _dropdownOverlay?.remove();
-    _dropdownOverlay = null;
-    if (mounted) setState(() => _appsDropdownOpen = false);
-  }
-
   void _resetAndNavigate(String path) {
     while (context.canPop()) {
       context.pop();
     }
     context.pushReplacement(path);
-  }
-
-  Widget _dropdownItem(String name, String path) {
-    return InkWell(
-      onTap: () {
-        _removeDropdownOverlay();
-        _resetAndNavigate(path);
-      },
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-        child: Text(
-          name,
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-            color: AppColors.mutedForeground,
-          ),
-        ),
-      ),
-    );
   }
 
   void _scrollToSection(String sectionId) {
@@ -130,12 +46,6 @@ class _AppNavigationState extends State<AppNavigation> {
         curve: Curves.easeInOut,
       );
     }
-  }
-
-  @override
-  void dispose() {
-    _removeDropdownOverlay();
-    super.dispose();
   }
 
   @override
@@ -225,38 +135,14 @@ class _AppNavigationState extends State<AppNavigation> {
                             ),
                             if (isHomePage) ...[
                               const SizedBox(width: 24),
-                              // Apps dropdown
-                              MouseRegion(
-                                cursor: SystemMouseCursors.click,
-                                child: GestureDetector(
-                                  key: _appsDropdownKey,
-                                  onTap: () {
-                                    if (_appsDropdownOpen) {
-                                      _removeDropdownOverlay();
-                                    } else {
-                                      _showAppsDropdown();
-                                    }
-                                  },
-                                  child: Row(
-                                    children: [
-                                      const Text(
-                                        'Apps',
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500,
-                                          color: AppColors.mutedForeground,
-                                        ),
-                                      ),
-                                      Icon(
-                                        _appsDropdownOpen
-                                            ? Icons.keyboard_arrow_up
-                                            : Icons.keyboard_arrow_down,
-                                        size: 16,
-                                        color: AppColors.mutedForeground,
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                              _navButton(
+                                'OCC',
+                                () => _resetAndNavigate('/occ'),
+                              ),
+                              const SizedBox(width: 24),
+                              _navButton(
+                                'Keibo',
+                                () => _resetAndNavigate('/keibo'),
                               ),
                             ],
                           ],

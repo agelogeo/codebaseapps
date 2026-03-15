@@ -1,10 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../theme/app_theme.dart';
 import '../../shared/cards.dart';
+import '../../shared/navigation.dart';
+import '../../shared/platform_utils.dart';
+import '../../shared/smart_app_banner.dart';
 
-class OccPage extends StatelessWidget {
+const _occAppStoreId = '6752423378';
+const _occAppStoreUrl = 'https://apps.apple.com/app/id$_occAppStoreId';
+const _occPlayStoreUrl =
+    'https://play.google.com/store/apps/details?id=com.codebaseapps.occ';
+
+class OccPage extends StatefulWidget {
   const OccPage({super.key});
+
+  @override
+  State<OccPage> createState() => _OccPageState();
+}
+
+class _OccPageState extends State<OccPage> {
+  @override
+  void initState() {
+    super.initState();
+    SmartAppBanner.show(appId: _occAppStoreId);
+  }
+
+  @override
+  void dispose() {
+    SmartAppBanner.remove();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +45,7 @@ class OccPage extends StatelessWidget {
         ),
         child: Column(
           children: [
-            // Simple back navigation for sub-pages
-            _buildSubNav(context),
+            const AppNavigation(),
             Expanded(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.all(24),
@@ -43,92 +68,6 @@ class OccPage extends StatelessWidget {
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSubNav(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xFF111827).withAlpha(200),
-        border: const Border(bottom: BorderSide(color: AppColors.border)),
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-      child: SafeArea(
-        bottom: false,
-        child: Row(
-          children: [
-            MouseRegion(
-              cursor: SystemMouseCursors.click,
-              child: GestureDetector(
-                onTap: () => context.go('/'),
-                child: Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          colors: [AppColors.primary, AppColors.gradientEnd],
-                        ),
-                        borderRadius: BorderRadius.circular(8),
-                        boxShadow: const [
-                          BoxShadow(color: AppColors.glowColor, blurRadius: 20),
-                        ],
-                      ),
-                      child: const Icon(
-                        Icons.code,
-                        color: Colors.white,
-                        size: 24,
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    const Text(
-                      'Codebase Apps',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.foreground,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const Spacer(),
-            _desktopNav(context),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _desktopNav(BuildContext context) {
-    return Row(
-      children: [
-        _navLink('Home', () => context.go('/')),
-        const SizedBox(width: 24),
-        _navLink('About', () => context.go('/')),
-        const SizedBox(width: 24),
-        _navLink('Apps', null),
-      ],
-    );
-  }
-
-  Widget _navLink(String label, VoidCallback? onTap) {
-    return MouseRegion(
-      cursor: onTap != null
-          ? SystemMouseCursors.click
-          : SystemMouseCursors.basic,
-      child: GestureDetector(
-        onTap: onTap,
-        child: Text(
-          label,
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-            color: AppColors.mutedForeground,
-          ),
         ),
       ),
     );
@@ -158,46 +97,90 @@ class OccPage extends StatelessWidget {
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 32),
-        Wrap(
-          spacing: 16,
-          runSpacing: 12,
-          alignment: WrapAlignment.center,
-          children: [
-            ElevatedButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.download, size: 20),
-              label: const Text('Download for iOS'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF2563EB),
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 16,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-            ),
-            OutlinedButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.download, size: 20),
-              label: const Text('Download for Android'),
-              style: OutlinedButton.styleFrom(
-                foregroundColor: const Color(0xFF2563EB),
-                side: const BorderSide(color: Color(0xFF2563EB)),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 16,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-            ),
-          ],
+        _buildDownloadButtons(),
+      ],
+    );
+  }
+
+  Widget _buildDownloadButtons() {
+    final platform = PlatformUtils.current;
+
+    if (platform == UserPlatform.ios) {
+      return _storeButton(
+        label: 'Download on the App Store',
+        icon: Icons.apple,
+        url: _occAppStoreUrl,
+        filled: true,
+      );
+    }
+
+    if (platform == UserPlatform.android) {
+      return _storeButton(
+        label: 'Get it on Google Play',
+        icon: Icons.play_arrow,
+        url: _occPlayStoreUrl,
+        filled: true,
+      );
+    }
+
+    // Desktop: show both
+    return Wrap(
+      spacing: 16,
+      runSpacing: 12,
+      alignment: WrapAlignment.center,
+      children: [
+        _storeButton(
+          label: 'Download for iOS',
+          icon: Icons.apple,
+          url: _occAppStoreUrl,
+          filled: true,
+        ),
+        _storeButton(
+          label: 'Download for Android',
+          icon: Icons.play_arrow,
+          url: _occPlayStoreUrl,
+          filled: false,
         ),
       ],
+    );
+  }
+
+  Widget _storeButton({
+    required String label,
+    required IconData icon,
+    required String url,
+    required bool filled,
+  }) {
+    Future<void> onTap() async {
+      final uri = Uri.parse(url);
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      }
+    }
+
+    if (filled) {
+      return ElevatedButton.icon(
+        onPressed: onTap,
+        icon: Icon(icon, size: 20),
+        label: Text(label),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: const Color(0xFF2563EB),
+          foregroundColor: Colors.white,
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        ),
+      );
+    }
+    return OutlinedButton.icon(
+      onPressed: onTap,
+      icon: Icon(icon, size: 20),
+      label: Text(label),
+      style: OutlinedButton.styleFrom(
+        foregroundColor: const Color(0xFF2563EB),
+        side: const BorderSide(color: Color(0xFF2563EB)),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      ),
     );
   }
 
