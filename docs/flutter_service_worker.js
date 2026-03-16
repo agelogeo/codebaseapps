@@ -3,14 +3,15 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 
-const RESOURCES = {"flutter_bootstrap.js": "934fa29aea72c7e82113fb511e840edf",
+const RESOURCES = {"flutter_bootstrap.js": "1c90384c4c8c22445fd31812395c34f5",
 "version.json": "8c487c22ce695e436c18c9222db62249",
 "index.html": "90bf5dc3eeae74b25e712d558f3d396b",
 "/": "90bf5dc3eeae74b25e712d558f3d396b",
-"main.dart.js": "a6c6ed822cfb100c34beb11bde9aa85c",
+"CNAME": "ba4916dea25d3f8797f893e2b434e297",
+"main.dart.js": "d64752de386630072a1c810774dcc358",
 ".well-known/apple-app-site-association": "77d093389e1e2d1752a4222557f5e999",
 ".well-known/assetlinks.json": "b8bcb6e63ec6372a324757c81e6b16d5",
-"404.html": "10d6dcdbc76c687060aeaa07b98afa78",
+"404.html": "90bf5dc3eeae74b25e712d558f3d396b",
 "flutter.js": "24bc71911b75b5f8135c949e27a2984e",
 "favicon.png": "5dcef449791fa27946b3d35ad8803796",
 "statements/annual-2025.pdf": "c47fb10ab3f35ee7b27ee9e31d3af2da",

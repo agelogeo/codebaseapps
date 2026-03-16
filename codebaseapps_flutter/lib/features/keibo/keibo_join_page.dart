@@ -1,5 +1,7 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../theme/app_theme.dart';
 import '../../shared/smart_app_banner.dart';
 
@@ -141,9 +143,14 @@ class _KeiboJoinPageState extends State<KeiboJoinPage> {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: () {
-                            // Try deep link, then fallback
-                            context.go('/keibo');
+                          onPressed: () async {
+                            final deepLink = code.isNotEmpty
+                                ? 'keibo://invite?code=$code'
+                                : 'keibo://invite';
+                            await launchUrl(Uri.parse(deepLink));
+                            Timer(const Duration(seconds: 2), () {
+                              if (mounted) context.go('/keibo');
+                            });
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.keiboOrange,
