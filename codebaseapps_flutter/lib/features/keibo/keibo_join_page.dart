@@ -21,9 +21,10 @@ class _KeiboJoinPageState extends State<KeiboJoinPage> {
   String members = '0';
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final params = GoRouterState.of(context).uri.queryParameters;
+  void initState() {
+    super.initState();
+    // Read directly from window.location.search, exactly like the old HTML implementation
+    final params = Uri.parse(html.window.location.href).queryParameters;
     code = params['code'] ?? '';
     groupName = params['groupName'] ?? 'Community';
     groupDesc = params['groupDesc'] ?? 'Join our community';
@@ -144,9 +145,18 @@ class _KeiboJoinPageState extends State<KeiboJoinPage> {
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () {
-                            final deepLink = code.isNotEmpty
-                                ? 'keibo://invite?code=$code'
-                                : 'keibo://invite';
+                            if (code.isEmpty) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text(
+                                    'Invalid invitation link: no invite code found',
+                                  ),
+                                  backgroundColor: Colors.red,
+                                ),
+                              );
+                              return;
+                            }
+                            final deepLink = 'keibo://invite?code=$code';
                             html.window.location.href = deepLink;
                             Timer(const Duration(seconds: 2), () {
                               if (mounted) context.go('/keibo');
