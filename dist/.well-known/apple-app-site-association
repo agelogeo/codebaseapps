@@ -1,0 +1,19 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": ["3V97BPKP8Z.com.codebaseapps.keiboapp"],
+        "components": [
+          {
+            "/": "/keibo/join",
+            "?": {
+              "code": "?*"
+            },
+            "comment": "Opens Keibo when user taps https://codebaseapps.com/keibo/join?code=..."
+          }
+        ]
+      }
+    ]
+  }
+}

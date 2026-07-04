@@ -3,24 +3,17 @@
     "apps": [],
     "details": [
       {
-        "appID": "3V97BPKP8Z.com.codebaseapps.keiboapp",
-        "paths": [
-          "/keibo/join*",
-          "/keibo/*"
-        ]
-      },
-      {
-        "appID": "3V97BPKP8Z.com.codebaseapps.occ",
-        "paths": [
-          "/occ/*"
+        "appIDs": ["3V97BPKP8Z.com.codebaseapps.keiboapp"],
+        "components": [
+          {
+            "/": "/keibo/join",
+            "?": {
+              "code": "?*"
+            },
+            "comment": "Opens Keibo when user taps https://codebaseapps.com/keibo/join?code=..."
+          }
         ]
       }
-    ]
-  },
-  "webcredentials": {
-    "apps": [
-      "3V97BPKP8Z.com.codebaseapps.keiboapp",
-      "3V97BPKP8Z.com.codebaseapps.occ"
     ]
   }
 }
